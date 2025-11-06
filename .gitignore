@@ -1,0 +1,8 @@
+# API Keys - NUNCA versionar
+*.env
+*.key
+
+# Backups
+*.bak
+*.backup
+*.claude
