@@ -1,0 +1,72 @@
+# Configuración de modelos para LLM Switcher
+# Este archivo define todos los modelos disponibles
+
+models:
+  deepseek:
+    name: "DeepSeek"
+    description: "DeepSeek Chat (Official API)"
+    display_name: "deepseek-coder"
+    base_url: "https://api.deepseek.com/anthropic"
+    model_name: "deepseek-chat"
+    auth_token_var: "DEEPSEEK_API_KEY"
+    aliases:
+      - "ds"
+      - "deepseek"
+    timeout: 600000
+    disable_traffic: 1
+
+  qwen:
+    name: "Qwen"
+    description: "Qwen Coder (via LiteLLM)"
+    display_name: "qwen"
+    base_url: "http://localhost:4000"
+    model_name: "qwen"
+    auth_token_var: "LITELLM_MASTER_KEY"
+    auth_token_default: "dummy-key-no-auth-required"
+    aliases:
+      - "qw"
+      - "qwen"
+    timeout: 600000
+    disable_traffic: 1
+
+  grok:
+    name: "Grok"
+    description: "Grok Code Fast 1 (via LiteLLM)"
+    display_name: "grok"
+    base_url: "http://localhost:4000"
+    model_name: "grok"
+    auth_token_var: "LITELLM_MASTER_KEY"
+    auth_token_default: "dummy-key-no-auth-required"
+    aliases:
+      - "gr"
+      - "grok"
+    timeout: 600000
+    disable_traffic: 1
+
+  minimax:
+    name: "Minimax"
+    description: "Minimax M2 (via LiteLLM)"
+    display_name: "minimax"
+    base_url: "http://localhost:4000"
+    model_name: "minimax-m2"
+    auth_token_var: "LITELLM_MASTER_KEY"
+    auth_token_default: "dummy-key-no-auth-required"
+    aliases:
+      - "mm"
+      - "minimax"
+    timeout: 600000
+    disable_traffic: 1
+
+  claude:
+    name: "Claude Pro"
+    description: "Claude Pro (Browser Authentication)"
+    display_name: "default_claude"
+    base_url: null
+    model_name: null
+    auth_token_var: null
+    aliases:
+      - "cl"
+      - "pro"
+      - "claude"
+    timeout: null
+    disable_traffic: null

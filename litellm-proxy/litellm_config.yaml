@@ -1,0 +1,80 @@
+# LiteLLM Configuration for Claude Code Switcher
+
+model_list:
+  # OpenRouter Models
+  - model_name: grok
+    litellm_params:
+      model: openrouter/x-ai/grok-code-fast-1
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+    model_info:
+      id: x-ai/grok-code-fast-1
+
+  - model_name: qwen
+    litellm_params:
+      model: openrouter/qwen/qwen3-coder
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+    model_info:
+      id: qwen/qwen3-coder  # Log and track as MiniMax, not Claude
+
+  - model_name: minimax-m2
+    litellm_params:
+      model: openrouter/minimax/minimax-m2
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+      timeout: 600
+      retries: 3
+    model_info:
+      id: minimax/minimax-m2  # Log and track as MiniMax, not Claude
+
+  # DeepSeek Model - Using standard OpenAI-compatible API
+  # Note: DeepSeek provides an OpenAI-compatible API at https://api.deepseek.com/v1
+  - model_name: deepseek
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DEEPSEEK_API_KEY
+      api_base: https://api.deepseek.com/v1
+      timeout: 600  # 10 minute timeout for long requests
+      retries: 3  # Retry up to 3 times on rate limit
+      rpm: 60  # Rate limit: 60 requests per minute to avoid DeepSeek rate limits
+
+
+# General settings
+general_settings:
+  # Disable authentication for local development
+  master_key: null
+  disable_spend_logs: false
+
+  cache:
+    type: "postgres"
+    url: "postgresql://llmproxy:dbpassword9090@db:5432/litellm"
+
+  # Rate limiting
+  max_parallel_requests: 10
+
+  # Request timeout
+  timeout: 600
+
+  # Enable logging
+  log_requests: true
+  log_responses: true
+
+  # Headers
+  headers:
+    "User-Agent": "Claude-Code-Switcher/1.0"
+
+# LiteLLM Settings for global configuration
+litellm_settings:
+  num_retries: 3  # Global retry count for rate limits
+  request_timeout: 600  # 10 minute timeout
+  set_verbose: true  # Enable detailed logging including costs
+
+# Environment variables
+environment_variables:
+  OPENROUTER_API_KEY: os.environ/OPENROUTER_API_KEY
+  DEEPSEEK_API_KEY: os.environ/DEEPSEEK_API_KEY
+  LITELLM_MASTER_KEY: os.environ/LITELLM_MASTER_KEY
+  LITELLM_SALT_KEY: os.environ/LITELLM_SALT_KEY
+  UI_USERNAME: os.environ/UI_USERNAME
+  UI_PASSWORD: os.environ/UI_PASSWORD
